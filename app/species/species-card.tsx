@@ -30,6 +30,21 @@ type Species = Database["public"]["Tables"]["species"]["Row"];
 export default function SpeciesCard({ species }: { species: Species }) {
   // Control open/closed state of the dialog
   const [open, setOpen] = useState<boolean>(false);
+  // boolean to determine whether user can edit species
+  {
+    /*
+  const [isVisible, setVisibility] = useState<boolean>(false);
+  async function useSessionId() {
+    const supabase = createServerSupabaseClient();
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+    const sessionId = session.user.id;
+    if(species.author == userId) {
+      true;
+  }
+*/
+  }
 
   return (
     <div className="m-4 w-72 min-w-72 flex-none rounded border-2 p-3 shadow">
@@ -45,7 +60,18 @@ export default function SpeciesCard({ species }: { species: Species }) {
 
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button className="mt-3 w-full">Learn More</Button>
+          <div className="flex">
+            <Button className="mt-3 w-full">Learn More</Button>
+            {/*add conditional below here if user created species*/}
+            <Button
+              data-show-if="{sessionID}:{species.common_name}"
+              type="button"
+              className="mt-3 w-full"
+              variant="secondary"
+            >
+              Edit Species
+            </Button>
+          </div>
 
           {/*COMMENTED OUT
           <Button variant="secondary">
@@ -57,7 +83,9 @@ export default function SpeciesCard({ species }: { species: Species }) {
         <DialogContent className="max-h-screen overflow-y-auto sm:max-w-[600px]">
           <DialogHeader>
             <DialogTitle>Learn More</DialogTitle>
-            <DialogDescription>Here is more information about the selected species!</DialogDescription>
+            <DialogDescription>
+              Here is more information about the {species.common_name}({species.scientific_name})!
+            </DialogDescription>
           </DialogHeader>
           <div>
             {/* add species info here*/}
