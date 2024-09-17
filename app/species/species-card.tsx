@@ -59,10 +59,15 @@ export default function SpeciesCard({ species }: { species: Species }) {
             <DialogTitle>Learn More</DialogTitle>
             <DialogDescription>Here is more information about the selected species!</DialogDescription>
           </DialogHeader>
+          <div>
+            {/* add species info here*/}
+            <p>Scientific Name: {species.scientific_name}</p>
+            <p>Common Name: {species.common_name}</p>
+            <p>Total Population: {species.total_population}</p>
+            <p>Kingdom: {species.kingdom}</p>
+            <p>Description: {species.description}</p>
+          </div>
           <div className="flex">
-            <Button type="submit" className="ml-1 mr-1 flex-auto">
-              Add Species
-            </Button>
             <DialogClose asChild>
               <Button type="button" className="ml-1 mr-1 flex-auto" variant="secondary">
                 Cancel
@@ -72,9 +77,7 @@ export default function SpeciesCard({ species }: { species: Species }) {
         </DialogContent>
       </Dialog>
 
-      {
-        //<Button className="mt-3 w-full">Learn More</Button>
-      }
+      {/*<Button className="mt-3 w-full">Learn More</Button>*/}
     </div>
   );
 }
